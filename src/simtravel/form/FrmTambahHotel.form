@@ -130,10 +130,10 @@
                   </Group>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="kodeField" max="32767" attributes="0"/>
-                      <Component id="namaField" max="32767" attributes="0"/>
-                      <Component id="levelCB" pref="223" max="32767" attributes="0"/>
-                      <Component id="tarifField" max="32767" attributes="0"/>
+                      <Component id="HTL_NamaField" max="32767" attributes="0"/>
+                      <Component id="HTL_LokasiField" max="32767" attributes="0"/>
+                      <Component id="HTL_BintangLevel" pref="223" max="32767" attributes="0"/>
+                      <Component id="HTL_TarifField" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="108" max="32767" attributes="0"/>
               </Group>
@@ -145,22 +145,22 @@
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="kodeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="HTL_NamaField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="namaField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="HTL_LokasiField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="levelCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="HTL_BintangLevel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tarifField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="HTL_TarifField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="36" max="32767" attributes="0"/>
               </Group>
@@ -178,9 +178,9 @@
             <Property name="text" type="java.lang.String" value="Lokasi "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="namaField">
+        <Component class="javax.swing.JTextField" name="HTL_LokasiField">
         </Component>
-        <Component class="javax.swing.JTextField" name="kodeField">
+        <Component class="javax.swing.JTextField" name="HTL_NamaField">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -192,7 +192,7 @@
             <Property name="text" type="java.lang.String" value="Bintang "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="levelCB">
+        <Component class="javax.swing.JComboBox" name="HTL_BintangLevel">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
@@ -208,7 +208,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="tarifField">
+        <Component class="javax.swing.JTextField" name="HTL_TarifField">
         </Component>
       </SubComponents>
     </Container>

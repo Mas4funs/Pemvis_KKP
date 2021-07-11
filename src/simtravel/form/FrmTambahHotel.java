@@ -42,17 +42,21 @@ public class FrmTambahHotel extends javax.swing.JDialog {
         con = new DBUtils().getKoneksi();
         userId = (String) data.get("userId");
         action = (String) data.get("action");
-        String kode = (String) data.get("userId");
-        String nama = (String) data.get("userName");
+        String nama = (String) data.get("nama");
+        String lokasi = (String) data.get("lokasi");
+        String level = (String) data.get("bintang");
+        String tarif = (String) data.get("tarif");
         initComponents();
         setLocationRelativeTo(null);
         
         if(action.equals("edit")){
             judulLabel.setText("Update Hotel");
-            kodeField.setText(kode);
-            namaField.setText(nama);
-            kodeField.setBackground(Color.LIGHT_GRAY);
-            kodeField.setEditable(false);            
+            HTL_NamaField.setText(nama);
+            HTL_LokasiField.setText(lokasi);
+            HTL_BintangLevel.setSelectedItem(level);
+            HTL_TarifField.setText(tarif);
+            HTL_NamaField.setBackground(Color.LIGHT_GRAY);
+            HTL_NamaField.setEditable(false);            
         }
         
         today = new Date();
@@ -60,14 +64,17 @@ public class FrmTambahHotel extends javax.swing.JDialog {
     }
     
     public boolean validasi(){
-        if(kodeField.getText() == null || kodeField.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Nama Tidak Boleh Kosong", "Error", JOptionPane.ERROR_MESSAGE);
+        if(HTL_NamaField.getText() == null || HTL_NamaField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Nama Hotel Tidak Boleh Kosong", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else if(namaField.getText() == null || namaField.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Lokasi tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if(HTL_LokasiField.getText() == null || HTL_LokasiField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Lokasi Hotel Tidak Boleh Kosong", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else if(tarifField.getText() == null || tarifField.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Tarif tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if(HTL_BintangLevel.getSelectedItem() == null || HTL_BintangLevel.getSelectedItem().equals("")){
+            JOptionPane.showMessageDialog(null, "Bintang Hotel tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(HTL_TarifField.getText() == null || HTL_TarifField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Tarif Hotel tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }    
         
@@ -78,10 +85,10 @@ public class FrmTambahHotel extends javax.swing.JDialog {
         String sql = "INSERT INTO tbl_hotel(nama, lokasi, bintang, tarif, created_by, created_dt) VALUES (?, ?, ?, ?, ?, ?) ";
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, kodeField.getText());
-            ps.setString(2, namaField.getText());
-            ps.setString(3, levelCB.getSelectedItem().toString());
-            ps.setString(4, tarifField.getText());
+            ps.setString(1, HTL_NamaField.getText());
+            ps.setString(2, HTL_LokasiField.getText());
+            ps.setString(3, HTL_BintangLevel.getSelectedItem().toString());
+            ps.setString(4, HTL_TarifField.getText());
             ps.setString(5, userId);
             ps.setTimestamp(6, new Timestamp(new java.util.Date().getTime()));
             ps.execute();
@@ -94,14 +101,14 @@ public class FrmTambahHotel extends javax.swing.JDialog {
     }
     
     public void updateRecord(){
-        String sql = "UPDATE tbl_hotel SET lokasi = ?, bintang = ?, tarif = ? WHERE name = ? ";
+        String sql = "UPDATE tbl_hotel SET lokasi = ?, bintang = ?, tarif = ? WHERE nama = ? ";
         con = new DBUtils().getKoneksi();
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, namaField.getText());
-            ps.setString(2, levelCB.getSelectedItem().toString());
-            ps.setString(3, tarifField.getText());
-            ps.setString(4, kodeField.getText());
+            ps.setString(1, HTL_LokasiField.getText());
+            ps.setString(2, HTL_BintangLevel.getSelectedItem().toString());
+            ps.setString(3, HTL_TarifField.getText());
+            ps.setString(4, HTL_NamaField.getText());
             ps.execute();
             
             JOptionPane.showMessageDialog(null, "Data berhasil di update", "Informasi", JOptionPane.INFORMATION_MESSAGE);
@@ -127,12 +134,12 @@ public class FrmTambahHotel extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        namaField = new javax.swing.JTextField();
-        kodeField = new javax.swing.JTextField();
+        HTL_LokasiField = new javax.swing.JTextField();
+        HTL_NamaField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        levelCB = new javax.swing.JComboBox<>();
-        tarifField = new javax.swing.JTextField();
+        HTL_BintangLevel = new javax.swing.JComboBox<>();
+        HTL_TarifField = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnSimpan = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
@@ -175,7 +182,7 @@ public class FrmTambahHotel extends javax.swing.JDialog {
 
         jLabel6.setText("Bintang ");
 
-        levelCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bintang 1", "Bintang 2", "Bintang 3", "Bintang 4", "Bintang 5" }));
+        HTL_BintangLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bintang 1", "Bintang 2", "Bintang 3", "Bintang 4", "Bintang 5" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,10 +198,10 @@ public class FrmTambahHotel extends javax.swing.JDialog {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(kodeField)
-                    .addComponent(namaField)
-                    .addComponent(levelCB, 0, 223, Short.MAX_VALUE)
-                    .addComponent(tarifField))
+                    .addComponent(HTL_NamaField)
+                    .addComponent(HTL_LokasiField)
+                    .addComponent(HTL_BintangLevel, 0, 223, Short.MAX_VALUE)
+                    .addComponent(HTL_TarifField))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -203,19 +210,19 @@ public class FrmTambahHotel extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(kodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HTL_NamaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HTL_LokasiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(levelCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HTL_BintangLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tarifField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HTL_TarifField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -359,6 +366,10 @@ public class FrmTambahHotel extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> HTL_BintangLevel;
+    private javax.swing.JTextField HTL_LokasiField;
+    private javax.swing.JTextField HTL_NamaField;
+    private javax.swing.JTextField HTL_TarifField;
     private javax.swing.JButton btnBatal;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JLabel jLabel1;
@@ -369,9 +380,5 @@ public class FrmTambahHotel extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel judulLabel;
-    private javax.swing.JTextField kodeField;
-    private javax.swing.JComboBox<String> levelCB;
-    private javax.swing.JTextField namaField;
-    private javax.swing.JTextField tarifField;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -228,7 +230,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
         JasperPrint jasperPrint = null;
                
          try {
-            URL url = getClass().getResource("/simtravel/report/rpt_pengguna.jrxml");
+            URL url = getClass().getResource("/simtravel/report/rpt_hotel.jrxml");
             jasperDesign = JRXmlLoader.load(url.openStream());
             
             Map param = new HashMap();
@@ -254,7 +256,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
         JasperDesign jasperDesign = null;
         JasperReport jasperReport = null;
         JasperPrint jasperPrint = null;
-        File dir = new File("D:/tmp/");
+        File dir = new File("E:/tmp/");
         if(!dir.exists()){
             try{
                 dir.mkdirs();
@@ -264,9 +266,9 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
             
         }
         
-        String FILE_NAME = dir.getAbsolutePath()+"/rpt_pengguna.pdf";
+        String FILE_NAME = dir.getAbsolutePath()+"/rpt_hotel.pdf";
          try {
-            File file = new File("src/simtravel/report/rpt_pengguna.jrxml");
+            File file = new File("src/simtravel/report/rpt_hotel.jrxml");
             jasperDesign = JRXmlLoader.load(file);
             
             Map param = new HashMap();
@@ -285,7 +287,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
     }
     
     public void generateExcel(){
-        File dir = new File("D:/tmp/");
+        File dir = new File("E:/tmp/");
         if(!dir.exists()){
             try{
                 dir.mkdirs();
@@ -376,7 +378,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
     }
     
     public void generateWord() throws FileNotFoundException, IOException{
-        File dir = new File("D:/tmp/");
+        File dir = new File("E:/tmp/");
         if(!dir.exists()){
             try{
                 dir.mkdirs();
@@ -406,7 +408,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
 
         //create first row
         XWPFTableRow tableRowOne = table.getRow(0);      
-        tableRowOne.getCell(0).setText("No.");
+        tableRowOne.getCell(0).setText("No");
         tableRowOne.addNewTableCell().setText("Nama Hotel");
         tableRowOne.addNewTableCell().setText("Lokasi");
         tableRowOne.addNewTableCell().setText("Bintang");
@@ -476,7 +478,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
         btnHapus = new javax.swing.JButton();
         expotXls = new javax.swing.JLabel();
         exportPdf = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        exportWord = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dataTable = new javax.swing.JTable();
@@ -601,7 +603,12 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/Word.png"))); // NOI18N
+        exportWord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/Word.png"))); // NOI18N
+        exportWord.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exportWordMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -615,7 +622,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportPdf)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(exportWord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tambahBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -629,7 +636,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
+                    .addComponent(exportWord)
                     .addComponent(exportPdf)
                     .addComponent(jLabel4)
                     .addComponent(expotXls)
@@ -727,16 +734,20 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
         }
         
         int i = dataTable.getSelectedRow();
-        String kode = (String)dataTable.getValueAt(i, 1);
-        String nama = (String)dataTable.getValueAt(i, 2);
+        String nama = (String)dataTable.getValueAt(i, 1);
+        String lokasi = (String)dataTable.getValueAt(i, 2);
+        String bintang = (String)dataTable.getValueAt(i, 3);
+        String tarif = (String)dataTable.getValueAt(i, 4);
         
-        System.out.println("Kode : "+kode);
+        System.out.println("Kode : "+nama);
         
         Map data = new HashMap();
         data.put("action", "edit");
-        data.put("userId", kode);
-        data.put("userName", nama);
-        new FrmTambahPengguna(null, true, data).setVisible(true);
+        data.put("nama", nama);
+        data.put("lokasi", lokasi);
+        data.put("bintang", bintang);
+        data.put("tarif", tarif);
+        new FrmTambahHotel(null, true, data).setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
@@ -770,12 +781,20 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void exportPdfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportPdfMouseClicked
-        generatePdf();
+        generatePdfOld();
     }//GEN-LAST:event_exportPdfMouseClicked
 
     private void expotXlsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expotXlsMouseClicked
         generateExcel();
     }//GEN-LAST:event_expotXlsMouseClicked
+
+    private void exportWordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportWordMouseClicked
+        try {
+            generateWord();
+        } catch (IOException ex) {
+            Logger.getLogger(FrmDaftarPengguna.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_exportWordMouseClicked
 
     /**
      * @param args the command line arguments
@@ -802,39 +821,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmDaftarHotel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
+   
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -857,13 +844,13 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbPengguna;
     private javax.swing.JTable dataTable;
     private javax.swing.JLabel exportPdf;
+    private javax.swing.JLabel exportWord;
     private javax.swing.JLabel expotXls;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
