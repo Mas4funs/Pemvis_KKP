@@ -54,7 +54,7 @@ public class FrmAbout extends javax.swing.JDialog {
         setForeground(new java.awt.Color(51, 51, 255));
 
         btnTutup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/cancel-16.png"))); // NOI18N
-        btnTutup.setText("Tutup");
+        btnTutup.setText("Close");
         btnTutup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTutupActionPerformed(evt);

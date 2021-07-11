@@ -102,8 +102,9 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         dataTable.setModel(model);
         
         String sql = "";
-        
-        if("ID Pengguna".equals(cbPengguna.getSelectedItem())){
+        if("Semua".equals(cbPengguna.getSelectedItem())){
+            sql = "SELECT * FROM tbl_user WHERE user_id or user_name or email or level LIKE ?";
+        }else if("ID Pengguna".equals(cbPengguna.getSelectedItem())){
             sql = "SELECT * FROM tbl_user WHERE user_id LIKE ?";
         }else{
             sql = "SELECT * FROM tbl_user WHERE user_name LIKE ? ";
@@ -482,6 +483,7 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         expotXls = new javax.swing.JLabel();
         exportPdf = new javax.swing.JLabel();
         exportWord = new javax.swing.JLabel();
+        btnEdit1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dataTable = new javax.swing.JTable();
@@ -522,10 +524,10 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
 
         jLabel3.setText("Kata Kunci ");
 
-        cbPengguna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Pengguna", "Nama Pengguna" }));
+        cbPengguna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "ID Pengguna", "Nama Pengguna" }));
 
         btnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/cari-16.png"))); // NOI18N
-        btnCari.setText("Cari");
+        btnCari.setText("Search");
         btnCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariActionPerformed(evt);
@@ -569,7 +571,7 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         jLabel4.setText("Export ");
 
         tambahBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/add_plus-16.png"))); // NOI18N
-        tambahBtn.setText("Tambah");
+        tambahBtn.setText("Add");
         tambahBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tambahBtnActionPerformed(evt);
@@ -585,7 +587,7 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         });
 
         btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/hapus-16.png"))); // NOI18N
-        btnHapus.setText("Hapus");
+        btnHapus.setText("Delete");
         btnHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusActionPerformed(evt);
@@ -613,6 +615,14 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
             }
         });
 
+        btnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/cancel-16.png"))); // NOI18N
+        btnEdit1.setText("Exit");
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEdit1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -629,9 +639,11 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tambahBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEdit)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHapus)
+                .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEdit1)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -646,7 +658,8 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tambahBtn)
                         .addComponent(btnEdit)
-                        .addComponent(btnHapus)))
+                        .addComponent(btnHapus)
+                        .addComponent(btnEdit1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -802,6 +815,10 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_exportWordMouseClicked
 
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnEdit1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -847,6 +864,7 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnEdit1;
     private javax.swing.JButton btnHapus;
     private javax.swing.JComboBox<String> cbPengguna;
     private javax.swing.JTable dataTable;
