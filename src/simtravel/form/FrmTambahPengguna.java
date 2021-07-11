@@ -46,6 +46,7 @@ public class FrmTambahPengguna extends javax.swing.JDialog {
         String kode = (String) data.get("userId");
         String nama = (String) data.get("userName");
         String email = (String) data.get("email");
+        String level = (String) data.get("level");
         initComponents();
         setLocationRelativeTo(null);
         
@@ -54,6 +55,7 @@ public class FrmTambahPengguna extends javax.swing.JDialog {
             kodeField.setText(kode);
             namaField.setText(nama);
             emailField.setText(email);
+            levelCB.setSelectedItem(level);
             kodeField.setBackground(Color.LIGHT_GRAY);
             kodeField.setEditable(false);
             passwordField.setEditable(false);
@@ -131,12 +133,13 @@ public class FrmTambahPengguna extends javax.swing.JDialog {
     }
     
     public void updateRecord(){
-        String sql = "UPDATE tbl_user SET user_name = ? WHERE user_id = ? ";
+        String sql = "UPDATE tbl_user SET user_name = ?, level = ? WHERE user_id = ? ";
         con = new DBUtils().getKoneksi();
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, namaField.getText());
-            ps.setString(2, kodeField.getText());
+            ps.setString(2, levelCB.getSelectedItem().toString());
+            ps.setString(3, kodeField.getText());
             ps.execute();
             
             JOptionPane.showMessageDialog(null, "Data berhasil di update", "Informasi", JOptionPane.INFORMATION_MESSAGE);

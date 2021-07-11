@@ -731,6 +731,7 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+
         if(dataTable.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(null, "Silakan pilih Data yang akan diupdate", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -740,6 +741,7 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         String kode = (String)dataTable.getValueAt(i, 1);
         String nama = (String)dataTable.getValueAt(i, 2);
         String email = (String)dataTable.getValueAt(i, 3);
+        String level = (String)dataTable.getValueAt(i, 4);
         
         System.out.println("Kode : "+kode);
         
@@ -748,7 +750,10 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         data.put("userId", kode);
         data.put("userName", nama);
         data.put("email", email);
+        data.put("level", level);
+        dispose();
         new FrmTambahPengguna(null, true, data).setVisible(true);
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
