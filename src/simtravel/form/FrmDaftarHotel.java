@@ -256,7 +256,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
         JasperDesign jasperDesign = null;
         JasperReport jasperReport = null;
         JasperPrint jasperPrint = null;
-        File dir = new File("E:/tmp/");
+        File dir = new File("/report/");
         if(!dir.exists()){
             try{
                 dir.mkdirs();
@@ -287,7 +287,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
     }
     
     public void generateExcel(){
-        File dir = new File("E:/tmp/");
+        File dir = new File("/report/");//"E:/tmp/"
         if(!dir.exists()){
             try{
                 dir.mkdirs();
@@ -378,7 +378,7 @@ public class FrmDaftarHotel extends javax.swing.JDialog {
     }
     
     public void generateWord() throws FileNotFoundException, IOException{
-        File dir = new File("E:/tmp/");
+        File dir = new File("/report/");
         if(!dir.exists()){
             try{
                 dir.mkdirs();
