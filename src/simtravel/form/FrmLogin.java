@@ -331,6 +331,7 @@ public class FrmLogin extends javax.swing.JDialog {
             Map data = new HashMap();
             data.put("userId", userId);
             data.put("userName", getUserName(userId));
+            dispose();
             new FrmMenuUtama(null, true, data).setVisible(true);
         }
         

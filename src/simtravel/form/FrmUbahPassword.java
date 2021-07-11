@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import simtravel.utils.EncryptionUtils;
 
 /**
  *
@@ -61,10 +62,10 @@ public class FrmUbahPassword extends javax.swing.JDialog {
         con = new DBUtils().getKoneksi();
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, passwordBaruField.getText());
+            ps.setString(1, EncryptionUtils.encrypt(passwordBaruField.getText(), "p@ssw0rd"));
             ps.setString(2, userId);          
             ps.execute();
-            
+            dispose();
             JOptionPane.showMessageDialog(null, "Password berhasil di ubah", "Informasi", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -223,14 +224,14 @@ public class FrmUbahPassword extends javax.swing.JDialog {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         if(validasi()){
             ubahPassword();
-            dispose();
+            
             Map data = new HashMap();
             data.put("userId", userId);
-            try {
-                new FrmLogin(null, true).setVisible(true);
+            /*try {
+                //new FrmLogin(null, true).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(FrmUbahPassword.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
             
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
