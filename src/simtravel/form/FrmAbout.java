@@ -8,7 +8,7 @@ package simtravel.form;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-/**
+/**g
  *
  * @author Nursalim
  */
