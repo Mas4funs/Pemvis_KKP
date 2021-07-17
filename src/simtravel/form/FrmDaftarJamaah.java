@@ -109,13 +109,13 @@ public class FrmDaftarJamaah extends javax.swing.JDialog {
         
         String sql = "";
         if("Semua".equals(cbPengguna.getSelectedItem())){
-            sql = "SELECT * FROM tbl_customer WHERE no_ktp LIKE ? or nama LIKE ? or email LIKE ? or no_telp LIKE ?";
+            sql = "SELECT * FROM tbl_customer WHERE no_ktp LIKE ? or nama LIKE ? or email LIKE ? or jns_kelamin LIKE ? or tgl_lahir LIKE ? or tempat_lahir LIKE ? or alamat LIKE ? or gol_darah LIKE ? or no_telp LIKE ?";
         }else if("No KTP".equals(cbPengguna.getSelectedItem())){
             sql = "SELECT * FROM tbl_customer WHERE no_ktp LIKE ?";
-        //}else if("Nama".equals(cbPengguna.getSelectedItem())){
-        //    sql = "SELECT * FROM tbl_customer WHERE nama LIKE ?";
-        //}else if("Email".equals(cbPengguna.getSelectedItem())){
-         //   sql = "SELECT * FROM tbl_customer WHERE email LIKE ?";
+        }else if("Nama".equals(cbPengguna.getSelectedItem())){
+            sql = "SELECT * FROM tbl_customer WHERE nama LIKE ?";
+        }else if("Email".equals(cbPengguna.getSelectedItem())){
+            sql = "SELECT * FROM tbl_customer WHERE email LIKE ?";
         }else{
             sql = "SELECT * FROM tbl_customer WHERE no_telp LIKE ? ";
         }
@@ -129,9 +129,15 @@ public class FrmDaftarJamaah extends javax.swing.JDialog {
             ps.setString(2, kataKunci);
             ps.setString(3, kataKunci);
             ps.setString(4, kataKunci);
+            ps.setString(5, kataKunci);
+            ps.setString(6, kataKunci);
+            ps.setString(7, kataKunci);
+            ps.setString(8, kataKunci);
+            ps.setString(9, kataKunci);
             rs = ps.executeQuery();
         }else{
                 ps.setString(1, kataKunci);
+                rs = ps.executeQuery();
         }
         
             while (rs.next()){
@@ -547,7 +553,7 @@ public class FrmDaftarJamaah extends javax.swing.JDialog {
 
         jLabel3.setText("Kata Kunci ");
 
-        cbPengguna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "No KTP", "Nama" }));
+        cbPengguna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "No KTP", "Nama", "Email", "No Telp" }));
 
         btnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/cari-16.png"))); // NOI18N
         btnCari.setText("Search");

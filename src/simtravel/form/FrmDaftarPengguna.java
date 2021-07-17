@@ -122,6 +122,7 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
             rs = ps.executeQuery();
         }else{
                 ps.setString(1, kataKunci);
+                rs = ps.executeQuery();
         }
         
             while (rs.next()){
