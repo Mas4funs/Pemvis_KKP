@@ -11,6 +11,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="kategoriMenu">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/simtravel/image/jamaah32.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Calon Jamaah"/>
               </Properties>
               <Events>
@@ -51,6 +54,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="penggunaMenu">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/simtravel/image/user24.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Pengguna"/>
               </Properties>
               <Events>

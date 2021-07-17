@@ -470,6 +470,7 @@ public class FrmMenuUtama extends javax.swing.JDialog {
 
         jMenu1.setText("Master");
 
+        kategoriMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/jamaah32.png"))); // NOI18N
         kategoriMenu.setText("Calon Jamaah");
         kategoriMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -502,6 +503,7 @@ public class FrmMenuUtama extends javax.swing.JDialog {
         jMenuItem6.setText("Paket Haji");
         jMenu1.add(jMenuItem6);
 
+        penggunaMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simtravel/image/user24.png"))); // NOI18N
         penggunaMenu.setText("Pengguna");
         penggunaMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -658,7 +660,7 @@ public class FrmMenuUtama extends javax.swing.JDialog {
         System.out.println("UserId == "+userId);
         Map data = new HashMap();
         data.put("userId", userId);
-//        new FrmDaftarKategori(null, true).setVisible(true);
+        new FrmDaftarJamaah(null, true).setVisible(true);
     }//GEN-LAST:event_kategoriMenuActionPerformed
 
     private void penggunaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_penggunaMenuActionPerformed
