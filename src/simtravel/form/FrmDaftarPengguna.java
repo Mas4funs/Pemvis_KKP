@@ -103,7 +103,7 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         
         String sql = "";
         if("Semua".equals(cbPengguna.getSelectedItem())){
-            sql = "SELECT * FROM tbl_user WHERE user_id or user_name or email or level LIKE ?";
+            sql = "SELECT * FROM tbl_user WHERE user_id LIKE ? or user_name LIKE ? or email LIKE ? or level LIKE ?";
         }else if("ID Pengguna".equals(cbPengguna.getSelectedItem())){
             sql = "SELECT * FROM tbl_user WHERE user_id LIKE ?";
         }else{
@@ -114,9 +114,16 @@ public class FrmDaftarPengguna extends javax.swing.JDialog {
         int cnt = 1;
         try {
             ps = con.prepareStatement(sql);
+        if("Semua".equals(cbPengguna.getSelectedItem())){
             ps.setString(1, kataKunci);
+            ps.setString(2, kataKunci);
+            ps.setString(3, kataKunci);
+            ps.setString(4, kataKunci);
             rs = ps.executeQuery();
-            
+        }else{
+                ps.setString(1, kataKunci);
+        }
+        
             while (rs.next()){
                 model.addRow(new Object[]{cnt++, 
                     rs.getString("user_id"), 
