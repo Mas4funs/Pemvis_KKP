@@ -87,11 +87,26 @@ public class FrmTambahJamaah extends javax.swing.JDialog {
         }else if(emailField.getText() == null ||emailField.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Password tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else if(TempatLahirField.getText() == null || TempatLahirField.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Konfirm Password tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if(levelCB.getSelectedItem() == null || levelCB.getSelectedItem().equals("")){
+            JOptionPane.showMessageDialog(null, "Jenis Kelamin tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else if(!emailField.getText().equals(TempatLahirField.getText())){
-            JOptionPane.showMessageDialog(null, "Password dan Konfirmasi Password harus sama", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if(TanggalLahir.getDateFormatString() == null || TanggalLahir.getDateFormatString().equals("")){
+            JOptionPane.showMessageDialog(null, "Tanggal Lahir tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;  
+        }else if(TempatLahirField.getText() == null ||TempatLahirField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Tempat Lahir tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(AlamatField.getText() == null ||AlamatField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Password tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(levelCB1.getSelectedItem() == null || levelCB1.getSelectedItem().equals("")){
+            JOptionPane.showMessageDialog(null, "Golongan Darah tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(NoTelpField.getText() == null ||NoTelpField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "NO Telp tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(AddrsFoto.getText() == null ||AddrsFoto.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Foto tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
@@ -114,6 +129,30 @@ public class FrmTambahJamaah extends javax.swing.JDialog {
         }else if(namaField.getText() == null || namaField.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Nama Kategori tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
+        }else if(emailField.getText() == null ||emailField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Password tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(levelCB.getSelectedItem() == null || levelCB.getSelectedItem().equals("")){
+            JOptionPane.showMessageDialog(null, "Jenis Kelamin tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(TanggalLahir.getDateFormatString() == null || TanggalLahir.getDateFormatString().equals("")){
+            JOptionPane.showMessageDialog(null, "Tanggal Lahir tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;  
+        }else if(TempatLahirField.getText() == null ||TempatLahirField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Tempat Lahir tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(AlamatField.getText() == null ||AlamatField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Password tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(levelCB1.getSelectedItem() == null || levelCB1.getSelectedItem().equals("")){
+            JOptionPane.showMessageDialog(null, "Golongan Darah tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(NoTelpField.getText() == null ||NoTelpField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "NO Telp tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(AddrsFoto.getText() == null ||AddrsFoto.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Foto tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         
         return true;
@@ -122,16 +161,21 @@ public class FrmTambahJamaah extends javax.swing.JDialog {
     
     
     public void tambahRecord(){
-        String sql = "INSERT INTO tbl_user(user_id, user_name, password, email, level, created_by, created_dt) VALUES (?, ?, ?, ?, ?, ?, ?) ";
+        String sql = "INSERT INTO tbl_customer(no_ktp, nama, email, jns_kelamin, tgl_lahir, tempat_lahir, alamat, gol_darah, no_telp, foto, created_by, created_dt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, kodeField.getText());
             ps.setString(2, namaField.getText());
-            ps.setString(3, namaField.getText());
-            ps.setString(4, emailField.getText());
-            ps.setString(5, levelCB.getSelectedItem().toString());
-            ps.setString(6, userId);
-            ps.setDate(7, new java.sql.Date(System.currentTimeMillis()));
+            ps.setString(3, emailField.getText());
+            ps.setString(4, levelCB.getSelectedItem().toString());
+            ps.setString(5, TanggalLahir.getDateFormatString());
+            ps.setString(6, TempatLahirField.getText());
+            ps.setString(7, AlamatField.getText());
+            ps.setString(8, levelCB1.getSelectedItem().toString());
+            ps.setString(9, NoTelpField.getText());
+            ps.setString(10, AddrsFoto.getText());
+            ps.setString(11, userId);
+            ps.setDate(12, new java.sql.Date(System.currentTimeMillis()));
             ps.execute();
             
             JOptionPane.showMessageDialog(null, "Data berhasil di tambahkan", "Informasi", JOptionPane.INFORMATION_MESSAGE);
@@ -451,7 +495,7 @@ public class FrmTambahJamaah extends javax.swing.JDialog {
                 if(pilih == JOptionPane.OK_OPTION){
                     tambahRecord();
                     dispose();
-                    new FrmDaftarPengguna(null, true).setVisible(true);
+                    new FrmDaftarJamaah(null, true).setVisible(true);
                 }
             }
         }else{
@@ -460,7 +504,7 @@ public class FrmTambahJamaah extends javax.swing.JDialog {
                 if(pilih == JOptionPane.OK_OPTION){
                     updateRecord();
                     dispose();
-                    new FrmDaftarPengguna(null, true).setVisible(true);
+                    new FrmDaftarJamaah(null, true).setVisible(true);
                 }
             }
         }
